@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10243a">
+<meta name="description" content="Alpha Global vous accompagne dans vos achats internationaux et vos commandes auprès de fournisseurs.">
+<title>Alpha Global — Achats internationaux</title>
+<style>
+:root{--navy:#10243a;--blue:#1769aa;--sky:#eaf4fb;--gold:#f5b544;--ink:#172333;--muted:#64748b;--line:#e2e8f0;--white:#fff;--green:#13845b}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:#f7f9fc;line-height:1.5}
+a{color:inherit}
+.wrap{width:min(1100px,92%);margin:auto}
+.topbar{background:var(--navy);color:white;font-size:.86rem;padding:9px 0}
+.topbar .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.header{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:850;letter-spacing:.4px;color:var(--navy)}
+.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:var(--navy);color:white;font-size:1.35rem}
+.navlinks{display:flex;align-items:center;gap:20px}
+.navlinks a{text-decoration:none;font-size:.92rem;font-weight:650}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 17px;border:0;border-radius:12px;background:var(--blue);color:white;text-decoration:none;font-weight:750;cursor:pointer;font:inherit}
+.btn:hover{filter:brightness(.96)}
+.btn.gold{background:var(--gold);color:#182638}
+.btn.outline{background:white;color:var(--navy);border:1px solid #cbd5e1}
+.hero{background:linear-gradient(120deg,#10243a 0%,#164b76 100%);color:white;padding:56px 0 60px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center}
+.eyebrow{font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#f9c96f;font-size:.78rem}
+.hero h1{font-size:clamp(2.1rem,5vw,3.7rem);line-height:1.08;letter-spacing:-1.5px;margin:14px 0}
+.hero p{font-size:1.08rem;color:#d7e7f5;max-width:590px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.hero-card{background:#fff;color:var(--ink);padding:24px;border-radius:24px;box-shadow:0 22px 60px #07162955}
+.hero-card h3{margin:0 0 8px}
+.hero-card p{font-size:.93rem;color:var(--muted);margin-top:0}
+.mini-step{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--line)}
+.num{flex:0 0 34px;height:34px;border-radius:11px;background:var(--sky);display:grid;place-items:center;color:var(--blue);font-weight:850}
+.section{padding:52px 0}
+.section-head{text-align:center;max-width:700px;margin:0 auto 28px}
+.section-head h2{font-size:clamp(1.7rem,3vw,2.4rem);margin:0 0 9px;color:var(--navy)}
+.section-head p{color:var(--muted);margin:0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:white;border:1px solid var(--line);border-radius:18px;padding:22px}
+.card-icon{width:46px;height:46px;border-radius:14px;background:var(--sky);display:grid;place-items:center;font-size:1.45rem}
+.card h3{margin:14px 0 6px}
+.card p{color:var(--muted);font-size:.95rem;margin:0}
+.order-section{background:#edf4fa}
+.order-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:24px;align-items:start}
+.side-note{background:var(--navy);color:white;border-radius:22px;padding:26px;position:sticky;top:90px}
+.side-note p{color:#d6e4f1}
+.side-note li{margin:9px 0}
+.form-card{background:white;border:1px solid var(--line);border-radius:22px;padding:24px}
+.form-card h2{margin:0 0 6px;color:var(--navy)}
+.form-card>p{margin-top:0;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:.9rem;font-weight:750}
+.field input,.field select,.field textarea{width:100%;border:1px solid #cbd5e1;border-radius:11px;padding:12px;font:inherit;background:white;color:var(--ink)}
+.field textarea{min-height:90px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid #bfdbfe;border-color:var(--blue)}
+.hint{font-size:.8rem;color:var(--muted)}
+.form-foot{display:flex;align-items:flex-start;gap:10px;margin:16px 0;color:var(--muted);font-size:.84rem}
+.form-foot input{margin-top:5px}
+.status-box{display:none;margin-top:18px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:14px;padding:16px}
+.status-box strong{color:#065f46}
+.status-box p{margin:6px 0 12px;color:#065f46}
+.status-box .btn{background:var(--green)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px}
+.timeline div{background:white;border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;font-size:.86rem}
+.timeline span{display:block;font-size:1.35rem;margin-bottom:6px}
+.notice{font-size:.86rem;color:var(--muted);margin-top:15px}
+.footer{background:#0a1929;color:#d9e4ee;padding:28px 0}
+.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.footer small{color:#9fb1c3}
+.mobile-cta{display:none}
+@media(max-width:760px){
+.navlinks{display:none}
+.hero{padding:40px 0}
+.hero-grid,.order-grid{grid-template-columns:1fr}
+.hero-card{margin-top:8px}
+.cards{grid-template-columns:1fr}
+.side-note{position:static}
+.form-grid{grid-template-columns:1fr}
+.field.full{grid-column:auto}
+.timeline{grid-template-columns:1fr 1fr}
+.section{padding:40px 0}
+.mobile-cta{display:block;position:sticky;bottom:0;padding:10px;background:#ffffffed;border-top:1px solid var(--line);z-index:4}
+.mobile-cta .btn{width:100%}
+.topbar .wrap{justify-content:center;text-align:center}
+.topbar .wrap span:last-child{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+<div class="wrap">
+<span>🌍 Achats internationaux simplifiés</span>
+<span>Service en français • Sénégal et environs</span>
+</div>
+</div>
+
+<header class="header">
+<div class="wrap nav">
+<a class="brand" href="#accueil">
+<span class="logo">A</span>
+<span>ALPHA GLOBAL<small style="display:block;font-size:.66rem;color:#64748b;letter-spacing:1.2px">ACHATS INTERNATIONAUX</small></span>
+</a>
+<nav class="navlinks">
+<a href="#services">Nos services</a>
+<a href="#fonctionnement">Comment ça marche</a>
+<a href="#commande">Demander un devis</a>
+</nav>
+<a class="btn" href="#commande">Commander ↗</a>
+</div>
+</header>
+
+<main>
+<section class="hero" id="accueil">
+<div class="wrap hero-grid">
+<div>
+<div class="eyebrow">Votre partenaire d'importation</div>
+<h1>Le produit que vous cherchez. <span style="color:#f9c96f">On vous aide à l'obtenir.</span></h1>
+<p>Envoyez-nous le lien du produit que vous avez trouvé sur Alibaba. Alpha Global vous accompagne pour demander un devis, organiser la commande et préparer la livraison.</p>
+<div class="hero-actions">
+<a class="btn gold" href="#commande">Demander un devis gratuit</a>
+<a class="btn outline" href="#fonctionnement">Découvrir le service</a>
+</div>
+</div>
+
+<div class="hero-card">
+<h3>Votre commande, étape par étape</h3>
+<p>Un accompagnement clair, de la demande à la livraison.</p>
+<div class="mini-step"><span class="num">1</span><div><strong>Envoyez votre produit</strong><div class="hint">Lien, photo ou description</div></div></div>
+<div class="mini-step"><span class="num">2</span><div><strong>Recevez un devis</strong><div class="hint">Produit, transport et frais estimés</div></div></div>
+<div class="mini-step"><span class="num">3</span><div><strong>Confirmez la commande</strong><div class="hint">Après validation du prix et des conditions</div></div></div>
+<div class="mini-step"><span class="num">4</span><div><strong>Suivez la livraison</strong><div class="hint">Mises à jour communiquées par notre équipe</div></div></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="services">
+<div class="wrap">
+<div class="section-head">
+<h2>Un service pensé pour vos achats</h2>
+<p>Pour les particuliers, les commerçants et les entreprises qui veulent acheter à l'international avec plus de simplicité.</p>
+</div>
+<div class="cards">
+<article class="card">
+<div class="card-icon">🔎</div>
+<h3>Recherche de fournisseurs</h3>
+<p>Nous vous aidons à examiner le produit, les conditions du fournisseur et les quantités minimales avant toute décision.</p>
+</article>
+<article class="card">
+<div class="card-icon">🧾</div>
+<h3>Devis transparent</h3>
+<p>Vous recevez un récapitulatif du prix du produit, des frais de service et du transport lorsqu'ils sont connus.</p>
+</article>
+<article class="card">
+<div class="card-icon">📦</div>
+<h3>Suivi de commande</h3>
+<p>Nous vous informons des étapes confirmées : commande, préparation, expédition, arrivée et livraison.</p>
+</article>
+</div>
+</div>
+</section>
+
+<section class="section" id="fonctionnement" style="padding-top:0">
+<div class="wrap">
+<div class="section-head">
+<h2>Comment ça marche ?</h2>
+<p>Vous gardez la visibilité sur les conditions avant de confirmer votre achat.</p>
+</div>
+<div class="timeline">
+<div><span>📝</span><strong>1. Demande</strong><br>Vous envoyez le besoin</div>
+<div><span>💬</span><strong>2. Devis</strong><br>Nous vérifions le coût</div>
+<div><span>✅</span><strong>3. Validation</strong><br>Vous acceptez les conditions</div>
+<div><span>🚚</span><strong>4. Livraison</strong><br>Suivi et réception</div>
+</div>
+</div>
+</section>
+
+<section class="section order-section" id="commande">
+<div class="wrap">
+<div class="order-grid">
+<aside class="side-note">
+<div class="eyebrow">Commençons votre projet</div>
+<h2>Demandez votre devis</h2>
+<p>Remplissez le formulaire. Votre demande sera préparée pour être envoyée à Alpha Global via WhatsApp.</p>
+<ul>
+<li>✓ Particuliers et professionnels</li>
+<li>✓ Petites et grandes quantités</li>
+<li>✓ Produits et liens Alibaba</li>
+</ul>
+<p class="hint" style="color:#b9cada">Important : aucune commande ni aucun paiement n'est effectué automatiquement par ce formulaire.</p>
+</aside>
+
+<div class="form-card">
+<h2>Votre demande de produit</h2>
+<p>Les champs marqués * sont obligatoires.</p>
+
+<form id="orderForm">
+<div class="form-grid">
+
+<div class="field">
+<label for="name">Nom complet *</label>
+<input id="name" name="name" required autocomplete="name" placeholder="Votre nom">
+</div>
+
+<div class="field">
+<label for="phone">Téléphone / WhatsApp *</label>
+<input id="phone" name="phone" required autocomplete="tel" placeholder="Ex. +221 77 000 00 00">
+</div>
+
+<div class="field">
+<label for="customerType">Vous êtes *</label>
+<select id="customerType" name="customerType" required>
+<option value="">Choisir</option>
+<option>Particulier</option>
+<option>Commerçant</option>
+<option>Entreprise</option>
+</select>
+</div>
+
+<div class="field">
+<label for="category">Catégorie *</label>
+<select id="category" name="category" required>
+<option value="">Choisir une catégorie</option>
+<option>Électronique et téléphones</option>
+<option>Vêtements et chaussures</option>
+<option>Maison et décoration</option>
+<option>Pièces automobiles</option>
+<option>Machines et équipements</option>
+<option>Beauté et accessoires</option>
+<option>Autre produit</option>
+</select>
+</div>
+
+<div class="field full">
+<label for="product">Nom ou description du produit *</label>
+<input id="product" name="product" required placeholder="Ex. chaussures de sport, modèle et couleur">
+</div>
+
+<div class="field full">
+<label for="link">Lien Alibaba (si disponible)</label>
+<input id="link" name="link" type="url" placeholder="https://www.alibaba.com/...">
+<span class="hint">Si vous n'avez pas de lien, décrivez simplement le produit.</span>
+</div>
+
+<div class="field">
+<label for="quantity">Quantité souhaitée *</label>
+<input id="quantity" name="quantity" required type="number" min="1" step="1" placeholder="Ex. 20">
+</div>
+
+<div class="field">
+<label for="budget">Budget estimé (facultatif)</label>
+<input id="budget" name="budget" placeholder="Ex. 150 000 FCFA">
+</div>
+
+<div class="field full">
+<label for="delivery">Ville et adresse de livraison *</label>
+<input id="delivery" name="delivery" required placeholder="Ex. Dakar, quartier...">
+</div>
+
+<div class="field full">
+<label for="details">Autres précisions</label>
+<textarea id="details" name="details" placeholder="Taille, couleur, qualité, date souhaitée..."></textarea>
+</div>
+
+</div>
+
+<div class="form-foot">
+<input type="checkbox" id="consent" required>
+<label for="consent">J'accepte que ces informations soient utilisées pour traiter ma demande de devis. *</label>
+</div>
+
+<button class="btn" type="submit" style="width:100%">Préparer ma demande WhatsApp →</button>
+
+<div class="status-box" id="result" role="status" aria-live="polite">
+<strong>Votre demande est prête.</strong>
+<p id="resultText">Vérifiez le message puis envoyez-le à notre équipe.</p>
+<button type="button" class="btn" id="whatsappBtn">Ouvrir WhatsApp</button>
+</div>
+
+<p class="notice">Devis soumis à confirmation. Les prix, frais de transport, délais, taxes et disponibilité doivent être vérifiés avant tout paiement. Ne payez pas un fournisseur sur la base d'un devis non confirmé.</p>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<div class="mobile-cta">
+<a class="btn gold" href="#commande">Demander un devis</a>
+</div>
+
+<footer class="footer">
+<div class="wrap footer-inner">
+<div>
+<strong>ALPHA GLOBAL</strong><br>
+<small>Vos achats internationaux, notre accompagnement.</small>
+</div>
+<div>
+<small>Contact professionnel : WhatsApp<br>© <span id="year"></span> Alpha Global</small>
+</div>
+</div>
+</footer>
+
+<script>
+const ALPHA_GLOBAL_WHATSAPP = "221787841234";
+let messageWhatsApp = "";
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+document.getElementById("orderForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const f = new FormData(this);
+
+  const fields = [
+    ["Nom", f.get("name")],
+    ["Téléphone du client", f.get("phone")],
+    ["Profil", f.get("customerType")],
+    ["Catégorie", f.get("category")],
+    ["Produit", f.get("product")],
+    ["Lien Alibaba", f.get("link") || "Non fourni"],
+    ["Quantité", f.get("quantity")],
+    ["Budget estimé", f.get("budget") || "Non précisé"],
+    ["Livraison", f.get("delivery")],
+    ["Précisions", f.get("details") || "Aucune"]
+  ];
+
+  messageWhatsApp = "Bonjour Alpha Global, je souhaite demander un devis.\n\n"
+    + fields.map(x => x[0] + ": " + x[1]).join("\n")
+    + "\n\nMerci de me confirmer le prix total estimé, les délais, les frais et les conditions avant toute commande.";
+
+  document.getElementById("result").style.display = "block";
+  document.getElementById("resultText").textContent =
+    "Demande préparée. Appuyez sur Ouvrir WhatsApp pour l'envoyer à Alpha Global.";
+
+  document.getElementById("result").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+});
+
+document.getElementById("whatsappBtn").addEventListener("click", function() {
+  const number = ALPHA_GLOBAL_WHATSAPP.replace(/\D/g, "");
+  const url = "https://wa.me/" + number + "?text=" + encodeURIComponent(messageWhatsApp);
+  window.open(url, "_blank");
+});
+</script>
+
+</body>
+</html>
