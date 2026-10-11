@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bah - Intelligence artificielle</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f2f5f3;
+      color: #222;
+    }
+
+    header {
+      background: #146c43;
+      color: white;
+      text-align: center;
+      padding: 22px;
+    }
+
+    main {
+      max-width: 600px;
+      margin: auto;
+      padding: 18px;
+    }
+
+    select, textarea, button {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 13px;
+      margin-top: 12px;
+      border-radius: 9px;
+      font-size: 16px;
+    }
+
+    select, textarea {
+      border: 1px solid #ccc;
+      background: white;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      border: none;
+      background: #146c43;
+      color: white;
+      font-weight: bold;
+    }
+
+    #reponse {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🤖 Bah AI</h1>
+    <p>Ton assistant intelligent</p>
+  </header>
+
+  <main>
+    <label for="mode">Choisis un service :</label>
+
+    <select id="mode">
+      <option value="assistant">Bah Assistant</option>
+      <option value="conseiller">Bah Conseiller d'achat</option>
+    </select>
+
+    <label for="question">Ta question :</label>
+
+    <textarea id="question"
+      placeholder="Exemple : Aide-moi à choisir un téléphone selon mon budget."></textarea>
+
+    <button id="envoyer" onclick="envoyerQuestion()">
+      Envoyer ma question
+    </button>
+
+    <div id="reponse" aria-live="polite">
+      Bonjour ! Je suis Bah. Comment puis-je t'aider ?
+    </div>
+  </main>
+
+  <script>
+    async function envoyerQuestion() {
+      const question =
+        document.getElementById("question").value.trim();
+
+      const mode =
+        document.getElementById("mode").value;
+
+      const reponse = document.getElementById("reponse");
+      const bouton = document.getElementById("envoyer");
+
+      if (!question) {
+        reponse.textContent = "Écris d'abord une question.";
+        return;
+      }
+
+      bouton.disabled = true;
+      reponse.textContent = "Bah réfléchit...";
+
+      try {
+        const resultat = await fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: question,
+            mode: mode
+          })
+        });
+
+        const donnees = await resultat.json();
+
+        if (!resultat.ok) {
+          throw new Error(donnees.error || "Une erreur est survenue.");
+        }
+
+        reponse.textContent = donnees.reply;
+      } catch (erreur) {
+        reponse.textContent =
+          "La connexion à l'IA a échoué. Vérifie que le serveur est démarré et connecté.";
+      } finally {
+        bouton.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
