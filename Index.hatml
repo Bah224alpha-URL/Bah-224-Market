@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bah AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080e19;color:#f4f7ff;font-family:Arial,sans-serif}
+header{padding:18px;border-bottom:1px solid #24364d;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:26px;font-weight:bold}
+.logo span{color:#00d6a0}
+main{max-width:700px;margin:auto;padding:25px 16px 110px}
+.welcome{text-align:center;padding:35px 0 20px}
+h1{font-size:30px}
+h1 span{color:#00d6a0}
+p{color:#a8bad5;line-height:1.6}
+.modes{display:flex;gap:10px;margin:20px 0}
+.mode{flex:1;padding:14px 5px;border-radius:13px;border:1px solid #29415e;background:#111e30;color:white}
+.mode.active{border-color:#00d6a0;background:#07352f}
+#chat{display:none;flex-direction:column;gap:14px;margin:20px 0}
+.msg{padding:14px;border-radius:15px;max-width:90%;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.user{align-self:flex-end;background:#173451}
+.ai{align-self:flex-start;background:#111e30;border:1px solid #29415e}
+.ai strong{color:#00d6a0}
+form{display:flex;gap:8px;padding:10px;border:1px solid #38516e;border-radius:20px;background:#111e30}
+input{min-width:0;flex:1;background:transparent;color:white;border:0;outline:none;padding:10px}
+.send{background:#00d6a0;border:0;border-radius:50%;width:45px;height:45px;font-size:20px}
+h2{font-size:20px;margin-top:30px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{padding:17px;border:1px solid #1765a2;border-radius:16px;background:#102a48}
+.card.shop{border-color:#008f76;background:#073b38}
+.card h3{font-size:17px}
+.card p{font-size:14px}
+.card button{background:#00d6a0;color:#06231e;border:0;border-radius:20px;padding:10px}
+.examples button{display:block;width:100%;text-align:left;margin:9px 0;padding:13px;background:#111e30;color:white;border:1px solid #29415e;border-radius:14px}
+footer{text-align:center;color:#71839b;font-size:12px;margin-top:30px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#080e19;border-top:1px solid #24364d;display:flex;justify-content:space-around;padding:15px 3px}
+nav button{background:transparent;color:#00d6a0;border:0;font-size:12px}
+@media(max-width:380px){.cards{grid-template-columns:1fr}h1{font-size:25px}}
+</style>
+</head>
+<body>
+<header>
+  <div>☰</div>
+  <div class="logo">✳ Bah <span>AI</span></div>
+  <button onclick="nouveau()" style="background:transparent;color:white;border:0;font-size:25px">＋</button>
+</header>
+
+<main>
+<section id="welcome" class="welcome">
+  <h1>Bonjour ! <span>👋</span></h1>
+  <h3>Je suis Bah AI, ton assistant intelligent.</h3>
+  <p>Pose-moi une question ou demande-moi un conseil d'achat.</p>
+</section>
+
+<div class="modes">
+  <button id="assistant" class="mode active" onclick="modeChoisi('assistant')">🤖 Bah Assistant</button>
+  <button id="conseiller" class="mode" onclick="modeChoisi('conseiller')">🛒 Bah Conseiller</button>
+</div>
+
+<section id="chat" aria-live="polite"></section>
+
+<form id="form">
+  <input id="question" placeholder="Écris ta question ici..." required>
+  <button class="send" aria-label="Envoyer">➤</button>
+</form>
+
+<section id="accueil">
+<h2>Fonctions principales</h2>
+<div class="cards">
+  <div class="card">
+    <h3>💬 Bah Assistant</h3>
+    <p>Pose tes questions et obtiens des réponses utiles.</p>
+    <button onclick="ouvrirChat()">Commencer →</button>
+  </div>
+  <div class="card shop">
+    <h3>🛒 Bah Conseiller</h3>
+    <p>Compare les produits et réfléchis avant d'acheter.</p>
+    <button onclick="modeChoisi('conseiller');ouvrirChat()">Commencer →</button>
+  </div>
+</div>
+<h2>Essaie une question</h2>
+<div class="examples">
+  <button onclick="proposer('Apprends-moi JavaScript.')">💻 Apprends-moi à programmer</button>
+  <button onclick="proposer('Comment faire un bon CV ?')">📄 Comment faire un CV ?</button>
+  <button onclick="modeChoisi('conseiller');proposer('Aide-moi à choisir un téléphone.')">📱 Aide-moi à choisir un téléphone</button>
+</div>
+<footer>Bah AI · Ton assistant intelligent</footer>
+</section>
+</main>
+
+<nav>
+<button onclick="accueil()">⌂<br>Accueil</button>
+<button onclick="ouvrirChat()">💬<br>Chat</button>
+<button onclick="modeChoisi('conseiller');ouvrirChat()">🛒<br>Conseiller</button>
+<button onclick="alert('Les paramètres seront bientôt disponibles.')">⚙<br>Paramètres</button>
+</nav>
+
+<script>
+let mode="assistant";
+function modeChoisi(m){
+  mode=m;
+  document.getElementById("assistant").classList.toggle("active",m==="assistant");
+  document.getElementById("conseiller").classList.toggle("active",m==="conseiller");
+}
+function ouvrirChat(){
+  document.getElementById("welcome").style.display="none";
+  document.getElementById("accueil").style.display="none";
+  document.getElementById("chat").style.display="flex";
+  document.getElementById("question").focus();
+}
+function accueil(){
+  document.getElementById("welcome").style.display="block";
+  document.getElementById("accueil").style.display="block";
+  document.getElementById("chat").style.display="none";
+}
+function nouveau(){
+  document.getElementById("chat").innerHTML="";
+  accueil();
+}
+function proposer(t){
+  document.getElementById("question").value=t;
+  ouvrirChat();
+}
+function ajouterMessage(texte,classe){
+  const m=document.createElement("div");
+  m.className="msg "+classe;
+  if(classe==="ai"){
+    const titre=document.createElement("strong");
+    titre.textContent="✳ Bah AI\n";
+    m.appendChild(titre);
+  }
+  m.appendChild(document.createTextNode(texte));
+  document.getElementById("chat").appendChild(m);
+  window.scrollTo(0,document.body.scrollHeight);
+  return m;
+}
+document.getElementById("form").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const champ=document.getElementById("question");
+  const texte=champ.value.trim();
+  if(!texte)return;
+  ouvrirChat();
+  champ.value="";
+  ajouterMessage(texte,"user");
+  const attente=ajouterMessage("Je réfléchis...","ai");
+  try{
+    const r=await fetch("/api/chat",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({message:texte,mode:mode})
+    });
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||"Erreur du serveur");
+    attente.lastChild.textContent=d.reply||"Aucune réponse reçue.";
+  }catch(err){
+    attente.lastChild.textContent="Bah AI n'est pas encore connecté au serveur. Nous devons terminer la configuration Python et du serveur.";
+  }
+});
+</script>
+</body>
+</html>
